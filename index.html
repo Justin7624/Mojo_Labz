@@ -230,6 +230,14 @@
 }
 /* === End mobile-only calculator layout fix === */
 
+
+  .inv-area{margin-top:10px;padding:10px;border:1px solid rgba(212,175,55,.35);background:linear-gradient(180deg, rgba(212,175,55,.08), rgba(0,0,0,0));border-radius:14px}
+  .inv-area .inv-title{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px}
+  .inv-pills{display:flex;flex-wrap:wrap;gap:6px}
+  .inv-pill{display:inline-flex;gap:6px;align-items:center;padding:6px 8px;border-radius:999px;border:1px solid rgba(212,175,55,.35);background:rgba(0,0,0,.35);font-size:12px;color:var(--ink)}
+  .inv-pill strong{color:var(--brand)}
+  td.inv{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:var(--brand)}
+
 </style>
 </head>
 <body>
@@ -286,6 +294,7 @@
     <table id="priceTable">
       <thead>
         <tr>
+          <th class="sort" data-sort="invId">ID</th>
           <th class="sort" data-sort="name">Product</th>
           <th class="sort" data-sort="strength">Strength</th>
           <th class="sort num" data-sort="amount">Amount</th>
@@ -519,7 +528,7 @@ const GUIDE = [
   },
   {
     "key": "wolverinebpc5mgtb5mg",
-    "name": "BPC 5mg + TB 5mg (Combo)",
+    "name": "Wolverine BPC 5mg+TB 5mg",
     "badge": "Recovery",
     "category": "healing",
     "short": "Combo recovery vial—often used for joints, mobility, and soft tissue repair support.",
@@ -535,7 +544,7 @@ const GUIDE = [
   },
   {
     "key": "wolverinebpc10mgtb10",
-    "name": "BPC 10mg + TB 10mg (Combo)",
+    "name": "Wolverine BPC 10mg+TB 10mg",
     "badge": "Recovery",
     "category": "healing",
     "short": "Higher strength combo—aimed at longer recovery runs and stubborn issues.",
@@ -1436,14 +1445,14 @@ const PRICES_RAW = [
     10
   ],
   [
-    "BPC 5mg + TB 5mg (Combo)",
+    "Wolverine BPC 5mg+TB 5mg",
     "10 mg",
     22.0,
     "mg",
     9
   ],
   [
-    "BPC 10mg + TB 10mg (Combo)",
+    "Wolverine BPC 10mg+TB 10mg",
     "20 mg",
     32.0,
     "mg",
@@ -1889,6 +1898,129 @@ const PRICES = PRICES_RAW.map(([name, strength, price, unit, stock]) => {
   return [name, strength, Number(price), unit, Number(stock) || 0];
 });
 
+
+/* ---------- Inventory IDs (manual mapping) ----------
+   Provided in order to match product labels shown on-site.
+*/
+const INVENTORY_IDS = [
+  {"label": "GLP-3RT (5mg)", "id": "RT5"},
+  {"label": "GLP-3RT (10mg)", "id": "RT10"},
+  {"label": "GLP-3RT (15mg)", "id": "RT15"},
+  {"label": "GLP-3RT (20mg)", "id": "RT20"},
+  {"label": "GLP-3RT (30mg)", "id": "RT30"},
+  {"label": "GLP-3RT (40mg)", "id": "RT40"},
+  {"label": "GLP-3RT (50mg)", "id": "RT50"},
+  {"label": "GLP-3RT (60mg)", "id": "RT60"},
+  {"label": "GLP-2TZ (5mg)", "id": "TR5"},
+  {"label": "GLP-2TZ (10mg)", "id": "TR10"},
+  {"label": "GLP-2TZ (15mg)", "id": "TR15"},
+  {"label": "GLP-2TZ (20mg)", "id": "TR20"},
+  {"label": "GLP-2TZ (30mg)", "id": "TR30"},
+  {"label": "GLP-2TZ (40mg)", "id": "TR40"},
+  {"label": "GLP-2TZ (50mg)", "id": "TR50"},
+  {"label": "GLP-2TZ (60mg)", "id": "TR60"},
+  {"label": "GLP-1SG (5mg)", "id": "SM5"},
+  {"label": "GLP-1SG (10mg)", "id": "SM10"},
+  {"label": "GLP-1SG (15mg)", "id": "SM15"},
+  {"label": "GLP-1SG (20mg)", "id": "SM20"},
+  {"label": "Survodutide (10mg)", "id": "SUR10"},
+  {"label": "Cagrilintide (5mg)", "id": "CGL5"},
+  {"label": "Cagrilintide (10mg)", "id": "CGL10"},
+  {"label": "MOTS-C (10mg)", "id": "MS10"},
+  {"label": "MOTS-C (30mg)", "id": "MS30"},
+  {"label": "MOTS-C (40mg)", "id": "MS40"},
+  {"label": "BPC-157 (10mg)", "id": "BC10"},
+  {"label": "BPC-157 (20mg)", "id": "BC20"},
+  {"label": "Wolverine BPC 5mg+TB 5mg (10mg)", "id": "BB10"},
+  {"label": "Wolverine BPC 10mg+TB 10mg (20mg)", "id": "BB20"},
+  {"label": "TB500(Thymosin B4 Acetate)(5mg)", "id": "BT5"},
+  {"label": "TB500(Thymosin B4 Acetate)(10mg)", "id": "BT10"},
+  {"label": "Melanotan (10mg)", "id": "MT1"},
+  {"label": "Melanotan 2 (10mg)", "id": "MT2"},
+  {"label": "GLOW (70mg)", "id": "BB70"},
+  {"label": "KLOW (80mg)", "id": "KLOW80"},
+  {"label": "NAD + (500mg)", "id": "NJ500"},
+  {"label": "NAD + (1000mg)", "id": "NJ1000"},
+  {"label": "Ipamorelin (5mg)", "id": "IP5"},
+  {"label": "Ipamorelin (10mg)", "id": "IP10"},
+  {"label": "Tesamorelin (5mg)", "id": "TSM5"},
+  {"label": "Tesamorelin (10mg)", "id": "TSM10"},
+  {"label": "Sermorelin Acetate (5mg)", "id": "SM05"},
+  {"label": "Sermorelin Acetate (10mg)", "id": "SM010"},
+  {"label": "SS-31  (10mg)", "id": "2S10"},
+  {"label": "SS-31  (50mg)", "id": "2S50"},
+  {"label": "IGF-1LR3 (1mg)", "id": "IG1"},
+  {"label": "GHK-CU (50mg)", "id": "CU50"},
+  {"label": "GHK-CU (100mg)", "id": "CU100"},
+  {"label": "DSIP (5mg)", "id": "DS5"},
+  {"label": "DSIP (10mg)", "id": "DS10"},
+  {"label": "DSIP (15mg)", "id": "DS15"},
+  {"label": "Epithalon (10mg)", "id": "ET10"},
+  {"label": "Epithalon (50mg)", "id": "ET50"},
+  {"label": "KPV (5mg)", "id": "KPV5"},
+  {"label": "KPV (10mg)", "id": "KPV10"},
+  {"label": "Semax (5mg)", "id": "XA5"},
+  {"label": "Semax (10mg)", "id": "XA10"},
+  {"label": "Semax (30mg)", "id": "XA30"},
+  {"label": "Selank (5mg)", "id": "SK5"},
+  {"label": "Selank (10mg)", "id": "SK10"},
+  {"label": "Selank (30mg)", "id": "SK30"},
+  {"label": "5-amino-1mq (5mg)", "id": "5AM"},
+  {"label": "5-amino-1mq (10mg)", "id": "10AM"},
+  {"label": "5-amino-1mq (50mg)", "id": "50AM"},
+  {"label": "CJC-1295 no DAC (5mg)", "id": "CND5"},
+  {"label": "CJC-1295 no DAC (10mg)", "id": "CND10"},
+  {"label": "CJC-1295 with DAC (5mg)", "id": "CD5"},
+  {"label": "CJC-1295 no DAC 5mg + IPA 5mg (10mg)", "id": "CP10"},
+  {"label": "AOD-9604 (5mg)", "id": "5AD"},
+  {"label": "AOD-9604 (10mg)", "id": "10AD"},
+  {"label": "FOXO4-DRI (10mg)", "id": "F410"},
+  {"label": "AHK-CU (100mg)", "id": "AU100"},
+  {"label": "Glutathione (1500mg)", "id": "GTT"},
+  {"label": "HGH 191AA (Somatropin) (10iu)", "id": "H10"},
+  {"label": "HGH 191AA (Somatropin)(12iu)", "id": "H12"},
+  {"label": "HGH 191AA (Somatropin) (15iu)", "id": "H15"},
+  {"label": "HGH 191AA (Somatropin) (24iu)", "id": "H24"},
+  {"label": "HGH 191AA (Somatropin) (36iu)", "id": "H36"},
+  {"label": "KissPeptin-10 (10mg)", "id": "KS10"},
+  {"label": "VIP (5mg)", "id": "VP5"},
+  {"label": "VIP (10mg)", "id": "VP10"},
+  {"label": "snap-8 (10mg)", "id": "NP810"},
+  {"label": "HCG (5,000iu)", "id": "G5K"},
+  {"label": "HCG (10,000iu)", "id": "G10K"},
+  {"label": "PT-141 (10mg)", "id": "P41"},
+  {"label": "Ara-290 (10mg)", "id": "RA10"},
+  {"label": "Pinealon (20mg)", "id": "PIN20"},
+  {"label": "SLU-PP-332 (5mg)", "id": "332"},
+  {"label": "easytouch 31 gauge 1ml 5/16\" 8mm (10 pack)", "id": "ET10"},
+  {"label": "Lemon Bottle (10mg/10mL)", "id": "LB10"},
+  {"label": "Acetic Acid 6% (10mL)", "id": "AA10"},
+  {"label": "Bac Water (10mL)", "id": "WA10"},
+  {"label": "Hospira Bac Water (30mL)", "id": "HOS30"}
+];
+
+function normKey(s){ return String(s||'').toLowerCase().replace(/\s+/g,'').replace(/["']/g,''); }
+
+const INVENTORY_ID_MAP = INVENTORY_IDS.reduce((acc, x)=>{ acc[normKey(x.label)] = x.id; return acc; }, {});
+
+function makeInvLabel(name, strengthOrDose){
+  const s = String(strengthOrDose||'').replace(/\s+/g,''); // e.g. "5mg", "10mg/10mL", "5,000iu", "10pack"
+  const n = String(name||'').trim();
+
+  // For GLP code families, label uses the short code only (not the long parenthetical)
+  if (/^GLP-3RT\b/i.test(n)) return `GLP-3RT (${s})`;
+  if (/^GLP-2TZ\b/i.test(n)) return `GLP-2TZ (${s})`;
+  if (/^GLP-1SG\b/i.test(n)) return `GLP-1SG (${s})`;
+
+  return `${n} (${s})`;
+}
+
+function getInventoryId(name, strengthOrDose){
+  const key = normKey(makeInvLabel(name, strengthOrDose));
+  return INVENTORY_ID_MAP[key] || '';
+}
+
+
 /* ---------- Starter dose map (neutral defaults) ---------- */
 const STARTERS = Object.fromEntries(GUIDE.map(x => [x.key, {dose:0, unit:'mg'}]));
 STARTERS.melanotan = {dose:0, unit:'mcg'};
@@ -2091,6 +2223,14 @@ function cardHTML(item, idx){
       <p class="desc">${esc(item.short)}</p>
       ${showOnset?`<div class="onset"><strong>When you notice changes:</strong> ${esc(item.onset)}</div>`:''}
       ${item.fact?`<div class="small" style="opacity:.9">Fact: ${esc(item.fact)}</div>`:''}
+      ${(()=>{
+        const pills=(item.doses||[]).map(d=>{
+          const id=getInventoryId(item.name,d);
+          if(!id) return '';
+          return `<span class=\"inv-pill\"><strong>${esc(d)}</strong> ${esc(id)}</span>`;
+        }).filter(Boolean).join('');
+        return pills ? '<div class="inv-area"><div class="inv-title">Inventory IDs</div><div class="inv-pills">' + pills + '</div></div>' : '';
+      })()}
       <div class="dose-label">Available sizes:</div>
       <div class="doses">${chips}</div>
       <details class="dropdown"><summary>More info <span class="small" style="opacity:.7">▼</span></summary><div class="drop-body">${item.more}</div></details>
@@ -2299,7 +2439,8 @@ function parseAmt(s){
 }
 const rows=PRICES.map(([name,strength,price,unit,stock])=>{
   const amount=parseAmt(strength);
-  return {name,strength,amount,price,ppu: amount?price/amount:0,unit,stock:Number(stock)||0};
+  const invId = getInventoryId(name, strength);
+  return {invId,name,strength,amount,price,ppu: amount?price/amount:0,unit,stock:Number(stock)||0};
 });
 
 let priceSortKey = null;
@@ -2308,6 +2449,7 @@ let priceSortDir = 1;
 function renderPrices(list){
   priceTbody.innerHTML=list.map(r=>`
     <tr>
+      <td class="inv">${esc(r.invId||"—")}</td>
       <td>${esc(r.name)}</td>
       <td>${esc(r.strength)}</td>
       <td class="num">${r.amount?num(r.amount):'—'}</td>
@@ -2321,7 +2463,7 @@ function renderPrices(list){
 
 function getFilteredPriceRows(){
   const t = (pq.value || '').toLowerCase();
-  let list = rows.filter(r => (r.name+' '+r.strength).toLowerCase().includes(t));
+  let list = rows.filter(r => (r.invId+' '+r.name+' '+r.strength).toLowerCase().includes(t));
   if (hideOOS) list = list.filter(r => (Number(r.stock)||0) > 0);
 
   if (priceSortKey) {
