@@ -30,19 +30,27 @@
   .vial-icon{
   width:32px;
   height:auto;
-  transition: filter .25s ease, transform .25s ease;
-  filter:
-    drop-shadow(0 0 4px rgba(212,175,55,.6))
-    drop-shadow(0 0 10px rgba(212,175,55,.4));
+  position: relative;
+  z-index: 1;
   }
   
-  .title-row:hover .vial-icon{
-    transform: scale(1.05);
-    filter:
-      drop-shadow(0 0 6px rgba(212,175,55,.8))
-      drop-shadow(0 0 16px rgba(212,175,55,.55))
-      drop-shadow(0 0 26px rgba(212,175,55,.35));
+  /* Gold halo behind icon */
+  .vial-icon::before{
+    content:"";
+    position:absolute;
+    inset:-8px;
+    z-index:-1;
+    border-radius:50%;
+    background: radial-gradient(
+      circle,
+      rgba(212,175,55,.55) 0%,
+      rgba(212,175,55,.35) 35%,
+      rgba(212,175,55,.15) 55%,
+      transparent 70%
+    );
+    filter: blur(6px);
   }
+
 
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
   .search{flex:1 1 340px;display:flex;gap:10px;align-items:center;background:#16171c;border:1px solid #272a36;border-radius:999px;padding:10px 14px;box-shadow:var(--shadow)}
