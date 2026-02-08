@@ -50,17 +50,6 @@
     );
     filter: blur(6px);
   }
-    .title-row:hover .vial-icon::before{
-    filter: blur(10px);
-    background: radial-gradient(
-      circle,
-      rgba(212,175,55,.75) 0%,
-      rgba(212,175,55,.45) 35%,
-      rgba(212,175,55,.2) 60%,
-      transparent 75%
-    );
-  }
-
 
 
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
@@ -271,6 +260,39 @@
   .inv-pill{display:inline-flex;gap:6px;align-items:center;padding:6px 8px;border-radius:999px;border:1px solid rgba(212,175,55,.35);background:rgba(0,0,0,.35);font-size:12px;color:var(--ink)}
   .inv-pill strong{color:var(--brand)}
   td.inv{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:var(--brand)}
+
+
+/* === Mojo Labz gold icon glow === */
+.vial-wrap{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vial-icon{
+  width:32px;
+  height:auto;
+  position: relative;
+  z-index: 1;
+}
+
+.vial-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-12px;
+  z-index:0;
+  border-radius:50%;
+  background: radial-gradient(
+    circle,
+    rgba(212,175,55,.75) 0%,
+    rgba(212,175,55,.45) 35%,
+    rgba(212,175,55,.18) 60%,
+    transparent 75%
+  );
+  filter: blur(10px);
+}
+/* === End gold icon glow === */
 
 </style>
 </head>
