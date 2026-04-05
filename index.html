@@ -2111,9 +2111,6 @@ function makeInvLabel(name, strengthOrDose){
 }
 
 function getInventoryId(name, strengthOrDose){
-  if (name === "GLP-3RT 5mg+Cag 5mg" && strength === "10 mg") {
-    invId = "RC10";
-  }
   const key = normKey(makeInvLabel(name, strengthOrDose));
   return INVENTORY_ID_MAP[key] || '';
 }
