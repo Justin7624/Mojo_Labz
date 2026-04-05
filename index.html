@@ -2100,10 +2100,6 @@ const INVENTORY_ID_MAP = INVENTORY_IDS.reduce((acc, x)=>{ acc[normKey(x.label)] 
 function makeInvLabel(name, strengthOrDose){
   const s = String(strengthOrDose||'').replace(/\s+/g,''); // e.g. "5mg", "10mg/10mL", "5,000iu", "10pack"
   const n = String(name||'').trim();
-
-  // 🔥 PRIORITY: blends FIRST
-  if (name.toLowerCase().includes("cag") && name.toLowerCase().includes("glp-3rt")) {
-    return "RC" + s;
   }
 
   // For GLP code families, label uses the short code only (not the long parenthetical)
@@ -2115,6 +2111,9 @@ function makeInvLabel(name, strengthOrDose){
 }
 
 function getInventoryId(name, strengthOrDose){
+  if (name === "GLP-3RT 5mg+Cag 5mg" && strength === "10 mg") {
+    invId = "RC10";
+  }
   const key = normKey(makeInvLabel(name, strengthOrDose));
   return INVENTORY_ID_MAP[key] || '';
 }
