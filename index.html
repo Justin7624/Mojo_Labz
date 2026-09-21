@@ -501,13 +501,15 @@ const GUIDE = [
       "5 mg",
       "10 mg",
       "15 mg",
-      "20 mg"
+      "20 mg",
+      "30 mg"
     ],
     "stock": {
       "5 mg": 14,
       "10 mg": 62,
       "15 mg": 10,
-      "20 mg": 78
+      "20 mg": 78,
+      "30 mg": 50
     },
     "more": "<ul><li>Educational info only—always confirm your label and concentration.</li></ul>"
   },
@@ -740,10 +742,12 @@ const GUIDE = [
     "onset": "Some feel it same-day; others notice gradually.",
     "fact": "Form: Lyophilized powder",
     "doses": [
+      "100 mg",
       "500 mg",
       "1000 mg"
     ],
     "stock": {
+      "100 mg": 90,
       "500 mg": 230,
       "1000 mg": 78
     },
@@ -854,6 +858,22 @@ const GUIDE = [
     "stock": {
       "50 mg": 82,
       "100 mg": 48
+    },
+    "more": "<ul><li>Educational info only—always confirm your label and concentration.</li></ul>"
+  },
+  {
+    "key": "ghkcu raw",
+    "name": "GHK-CU raw",
+    "badge": "Skin",
+    "category": "energy",
+    "short": "Copper peptide—supports skin texture and collagen-focused routines.",
+    "onset": "Usually gradual (weeks+).",
+    "fact": "Form: Lyophilized powder",
+    "doses": [
+      "1 g"
+    ],
+    "stock": {
+      "1 g": 25 
     },
     "more": "<ul><li>Educational info only—always confirm your label and concentration.</li></ul>"
   },
@@ -1346,6 +1366,22 @@ const GUIDE = [
     "more": "<ul><li>Supply item. Keep sterile; label concentration and date once opened/used.</li></ul>"
   },
   {
+    "key": "LipoC - no B vitamins",
+    "name": "Lipo C - no B vitamins",
+    "badge": "Wellness",
+    "category": "energy",
+    "short": "Liquid wellness blend commonly used in body composition and energy-support routines.",
+    "onset": "—",
+    "fact": "Form: Liquid",
+    "doses": [
+      "? mL"
+    ],
+    "stock": {
+      "? mL": 60
+    },
+    "more": "<ul><li>Supply item. Keep sterile; label concentration and date once opened/used.</li></ul>"
+  },
+  {
     "key": "lemonbottle",
     "name": "Lemon Bottle",
     "badge": "Supply",
@@ -1648,6 +1684,13 @@ const PRICES_RAW = [
     78
   ],
   [
+    "GLP-1SG",
+    "30 mg",
+    40.0,
+    "mg",
+    50
+  ],
+  [
     "Survodutide",
     "10 mg",
     40.0,
@@ -1782,6 +1825,13 @@ const PRICES_RAW = [
   ],
   [
     "NAD+",
+    "100 mg",
+    15.0,
+    "mg",
+    90
+  ],
+  [
+    "NAD+",
     "500 mg",
     20.0,
     "mg",
@@ -1877,6 +1927,13 @@ const PRICES_RAW = [
     30.0,
     "mg",
     48
+  ],
+  [
+    "GHK-CU raw",
+    "1 g",
+    15.0,
+    "mg",
+    25
   ],
   [
     "DSIP",
@@ -2215,6 +2272,13 @@ const PRICES_RAW = [
     66
   ],
   [
+    "Lipo C - no B vitamins",
+    "? mL",
+    25.00,
+    "mL",
+    60
+  ],
+  [
     "Lemon Bottle",
     "10 mg/ 10 mL",
     20.0,
@@ -2323,6 +2387,7 @@ const INVENTORY_IDS = [
   {"label": "GLP-1SG (10mg)", "id": "SM10"},
   {"label": "GLP-1SG (15mg)", "id": "SM15"},
   {"label": "GLP-1SG (20mg)", "id": "SM20"},
+  {"label": "GLP-1SG (30mg)", "id": "SM30"},
   {"label": "Survodutide (10mg)", "id": "SUR10"},
   {"label": "Cagrilintide (5mg)", "id": "CGL5"},
   {"label": "Cagrilintide (10mg)", "id": "CGL10"},
@@ -2356,6 +2421,7 @@ const INVENTORY_IDS = [
   {"label": "IGF-1LR3 (1mg)", "id": "IG1"},
   {"label": "GHK-CU (50mg)", "id": "CU50"},
   {"label": "GHK-CU (100mg)", "id": "CU100"},
+  {"label": "GHK-CU raw (1g)", "id": "CUR1"},
   {"label": "DSIP (5mg)", "id": "DS5"},
   {"label": "DSIP (10mg)", "id": "DS10"},
   {"label": "DSIP (15mg)", "id": "DS15"},
